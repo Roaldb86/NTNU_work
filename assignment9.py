@@ -87,8 +87,9 @@ for i in range(5):
     f = Field(drunk, Location(0, 0))
     distances = Drunk.performTrial(500, f)
     pylab.plot(distances)
-    pylab.title('Homer\'s Random Walk')
+    pylab.title('Drunk students')
     pylab.xlabel('Time')
+    pylab.grid()
     pylab.ylabel('Distance from Origin')
 
 
