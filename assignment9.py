@@ -30,17 +30,35 @@ class CompassPt(object):
         else:
             raise ValueError('in CompassPt.__init__')
 
-    def move(self, dist):
-        if self.pt == 'N':
-            return (0, dist)
-        elif self.pt == 'S':
-            return (0, -dist)
-        elif self.pt == 'E':
-            return (dist, 0)
-        elif self.pt == 'W':
-            return (-dist, 0)
-        else:
-            raise ValueError('in CompassPt.move')
+    def move(self, steps, start):
+        x, y = start
+        condition1 = False
+        condition2 = False
+
+        while condition1 == False and condition2 == False:
+            for i in range(steps):
+                if x <= (-20.0):
+                    condition1 = True
+                elif x >= 20.0:
+                    condition1 = True
+                elif y <= (-20.0):
+                    condition2 = True
+                elif y >= 20.0:
+                    condition2 = True
+                else:
+                    step = choice(['N', 'W', 'S', 'E'])
+                    if step == 'N':
+                        y += 0.5
+                    elif step == 'S':
+                        y -= 0.5
+                    elif step == 'E':
+                        x += 0.5
+                    elif step == 'W':
+                        x -= 0.5
+                    else:
+                        raise ValueError ("In Drunk.move")
+            return x,y
+        return x, y
 
 
 class Field(object):
@@ -77,21 +95,24 @@ class Drunk(object):
         for t in range(1, time + 1):
             f.getDrunk().move(f)
             newLoc = f.getLoc()
+            print(newLoc)
             distance = newLoc.getDist(start)
             distances.append(distance)
-        return distances
+        return newLoc
 
-for i in range(5):
+for i in range(1):
     drunk = Drunk(i)
 
     f = Field(drunk, Location(0, 0))
-    distances = Drunk.performTrial(500, f)
-    pylab.plot(distances)
+    location = Drunk.performTrial(10, f)
+
+    # pylab.plot()
     pylab.title('Drunk students')
     pylab.xlabel('Time')
-    pylab.grid()
+    # pylab.grid(1,1)
     pylab.ylabel('Distance from Origin')
-
+    pylab.scatter(newLoc)
+    # pylab.plot(location)
 
 def performSim(time, numTrials):
     distLists = []
@@ -118,5 +139,5 @@ def ansQuest(maxTime, numTrials):
     pylab.title('Average Distance vs. Time (' + str(len(distLists)) + ' trials)')
 
 
-ansQuest(500, 300)
+# ansQuest(500, 300)
 pylab.show()
