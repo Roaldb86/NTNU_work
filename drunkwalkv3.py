@@ -3,8 +3,6 @@ import math
 import random
 import pylab
 
-# step = ''
-
 class Field(object):
     def __init__(self, drunk, loc):
         self.drunk = drunk
@@ -143,7 +141,3 @@ def main():
 if __name__ == '__main__':
     main()
 
-"""Jævla to-do lista"""
-# <--1--> Fix Fixed field limit
-# <--2--> Skriv sim method/function
-#
